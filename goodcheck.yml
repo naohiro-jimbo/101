@@ -1,0 +1,19 @@
+rules:
+  - id: security.link
+    pattern:
+      - token: 'target="_blank"'
+      - token: 'target: "_blank"'
+    message: |
+      Specify rel="noopener" for security reasons.
+
+      Opening new tab without rel="noopener" may cause a security issue.
+      It allows modifying original tab URLs from opened tabs.
+    justification:
+      - When opening a URL in our service
+    glob:
+      - "**/*.html"
+      - "**/*.html.erb"
+    fail:
+      - '<a href="https://github.com" target="_blank">GitHub</a>'
+    pass:
+      - '<a href="/signup">Signup</a>'
